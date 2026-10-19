@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+  <h1>Objetos encontrados</h1>
+  <p class="subtitulo">Registra y consulta los objetos encontrados en la escuela.</p>
+
+  <form class="filtros" method="get">
+    <input type="text" name="q" value="{{ busqueda }}" placeholder="Buscar por nombre, lugar o descripción...">
+    <select name="categoria">
+      <option value="">Todas las categorías</option>
+      {% for c in categorias %}
+        <option value="{{ c }}" {% if c == categoria %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <p class="total">{{ objetos|length }} objeto(s) encontrado(s)</p>
+
+  {% if objetos %}
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Lugar</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for o in objetos %}
+            <tr>
+              <td>{{ o.id }}</td>
+              <td>{{ o.nombre }}</td>
+              <td><span class="etiqueta">{{ o.categoria }}</span></td>
+              <td>{{ o.lugar }}</td>
+              <td>{{ o.fecha }}</td>
+              <td>{{ o.descripcion }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="vacio">No se encontraron objetos.</p>
+  {% endif %}
+{% endblock %}

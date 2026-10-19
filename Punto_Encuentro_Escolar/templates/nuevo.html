@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+  <h1>Registrar objeto</h1>
+  <p class="subtitulo">Llena los datos del objeto que encontraste.</p>
+
+  <form class="formulario" method="post">
+    <label>Nombre
+      <input type="text" name="nombre" value="{{ valores.nombre }}" placeholder="Ej. Calculadora" required>
+    </label>
+
+    <label>Categoría
+      <input type="text" name="categoria" value="{{ valores.categoria }}" list="sugerencias" placeholder="Ej. Electrónica" required>
+      <datalist id="sugerencias">
+        <option value="Electrónica">
+        <option value="Mochilas">
+        <option value="Documentos">
+        <option value="Ropa">
+        <option value="Útiles">
+      </datalist>
+    </label>
+
+    <label>Lugar donde se encontró
+      <input type="text" name="lugar" value="{{ valores.lugar }}" placeholder="Ej. Biblioteca" required>
+    </label>
+
+    <label>Fecha
+      <input type="date" name="fecha" value="{{ valores.fecha }}" required>
+    </label>
+
+    <label>Descripción
+      <textarea name="descripcion" rows="3" placeholder="Describe el objeto" required>{{ valores.descripcion }}</textarea>
+    </label>
+
+    <div class="acciones">
+      <button type="submit">Guardar</button>
+      <a href="{{ url_for('main.inicio') }}">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

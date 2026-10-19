@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punto de Encuentro Escolar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+
+  <header class="barra">
+    <a class="logo" href="{{ url_for('main.inicio') }}">🎒 Punto de Encuentro Escolar</a>
+    <nav>
+      <a href="{{ url_for('main.inicio') }}">Objetos</a>
+      <a class="boton" href="{{ url_for('main.nuevo') }}">+ Registrar objeto</a>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+      {% for tipo, texto in mensajes %}
+        <p class="mensaje {{ tipo }}">{{ texto }}</p>
+      {% endfor %}
+    {% endwith %}
+
+    {% block contenido %}{% endblock %}
+  </main>
+
+</body>
+</html>
